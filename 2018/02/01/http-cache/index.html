@@ -7,7 +7,7 @@
     
 
     <title>
-      浏览器缓存基本认识 | 码农的脚印 
+      浏览器缓存基本认识 | 柠檬茶 
     </title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -18,9 +18,9 @@
 
     <meta name="description" content="作为一名前端开发，工作基本上就是天天和浏览器打交道。那缓存这块也是前端领域离不开的话题，深入理解浏览器缓存将更有利于我们在前端中优化。 浏览器缓存又分两种，分别是强制缓存和协商缓存，两种缓存方式区别在于有无发起HTTP请求。 什么是浏览器缓存浏览器向服务器获取资源（HTML页面、静态资源等）后，保存到浏览器的副本，当下一次请求同一个资源时，如果命中缓存规则，则直接使用浏览器的副本，否则重新向服务器">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浏览器缓存基本认识 | 码农的脚印">
+<meta property="og:title" content="浏览器缓存基本认识 | 柠檬茶">
 <meta property="og:url" content="https://fang0408.github.io/2018/02/01/http-cache/index.html">
-<meta property="og:site_name" content="码农的脚印">
+<meta property="og:site_name" content="柠檬茶">
 <meta property="og:description" content="作为一名前端开发，工作基本上就是天天和浏览器打交道。那缓存这块也是前端领域离不开的话题，深入理解浏览器缓存将更有利于我们在前端中优化。 浏览器缓存又分两种，分别是强制缓存和协商缓存，两种缓存方式区别在于有无发起HTTP请求。 什么是浏览器缓存浏览器向服务器获取资源（HTML页面、静态资源等）后，保存到浏览器的副本，当下一次请求同一个资源时，如果命中缓存规则，则直接使用浏览器的副本，否则重新向服务器">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://fang0408.github.io/2018/02/01/http-cache/http-cache-expires.png">
@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://fang0408.github.io/2018/02/01/http-cache/http-cache-last-modified.png">
 <meta property="og:updated_time" content="2018-02-10T15:28:56.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="浏览器缓存基本认识 | 码农的脚印">
+<meta name="twitter:title" content="浏览器缓存基本认识 | 柠檬茶">
 <meta name="twitter:description" content="作为一名前端开发，工作基本上就是天天和浏览器打交道。那缓存这块也是前端领域离不开的话题，深入理解浏览器缓存将更有利于我们在前端中优化。 浏览器缓存又分两种，分别是强制缓存和协商缓存，两种缓存方式区别在于有无发起HTTP请求。 什么是浏览器缓存浏览器向服务器获取资源（HTML页面、静态资源等）后，保存到浏览器的副本，当下一次请求同一个资源时，如果命中缓存规则，则直接使用浏览器的副本，否则重新向服务器">
 <meta name="twitter:image" content="https://fang0408.github.io/2018/02/01/http-cache/http-cache-expires.png">
     
@@ -62,12 +62,12 @@
 
         
 
-        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">码农的脚印</a></h1>
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">柠檬茶</a></h1>
         <hr class="panel-cover__divider" />
 
         
         <p class="panel-cover__description">
-          前端码农
+          程序猿的脚印
         </p>
         <hr class="panel-cover__divider panel-cover__divider--secondary" />
         

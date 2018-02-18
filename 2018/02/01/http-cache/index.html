@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      浏览器缓存基本认识 | 码农的脚印 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="Fang0408">
+    
+    
+
+    <meta name="description" content="作为一名前端开发，工作基本上就是天天和浏览器打交道。那缓存这块也是前端领域离不开的话题，深入理解浏览器缓存将更有利于我们在前端中优化。 浏览器缓存又分两种，分别是强制缓存和协商缓存，两种缓存方式区别在于有无发起HTTP请求。 什么是浏览器缓存浏览器向服务器获取资源（HTML页面、静态资源等）后，保存到浏览器的副本，当下一次请求同一个资源时，如果命中缓存规则，则直接使用浏览器的副本，否则重新向服务器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浏览器缓存基本认识 | 码农的脚印">
+<meta property="og:url" content="https://fang0408.github.io/2018/02/01/http-cache/index.html">
+<meta property="og:site_name" content="码农的脚印">
+<meta property="og:description" content="作为一名前端开发，工作基本上就是天天和浏览器打交道。那缓存这块也是前端领域离不开的话题，深入理解浏览器缓存将更有利于我们在前端中优化。 浏览器缓存又分两种，分别是强制缓存和协商缓存，两种缓存方式区别在于有无发起HTTP请求。 什么是浏览器缓存浏览器向服务器获取资源（HTML页面、静态资源等）后，保存到浏览器的副本，当下一次请求同一个资源时，如果命中缓存规则，则直接使用浏览器的副本，否则重新向服务器">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://fang0408.github.io/2018/02/01/http-cache/http-cache-expires.png">
+<meta property="og:image" content="https://fang0408.github.io/2018/02/01/http-cache/http-cache-etag.png">
+<meta property="og:image" content="https://fang0408.github.io/2018/02/01/http-cache/http-cache-last-modified.png">
+<meta property="og:updated_time" content="2018-02-10T15:28:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浏览器缓存基本认识 | 码农的脚印">
+<meta name="twitter:description" content="作为一名前端开发，工作基本上就是天天和浏览器打交道。那缓存这块也是前端领域离不开的话题，深入理解浏览器缓存将更有利于我们在前端中优化。 浏览器缓存又分两种，分别是强制缓存和协商缓存，两种缓存方式区别在于有无发起HTTP请求。 什么是浏览器缓存浏览器向服务器获取资源（HTML页面、静态资源等）后，保存到浏览器的副本，当下一次请求同一个资源时，如果命中缓存规则，则直接使用浏览器的副本，否则重新向服务器">
+<meta name="twitter:image" content="https://fang0408.github.io/2018/02/01/http-cache/http-cache-expires.png">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">码农的脚印</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          前端码农
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/fang0408" title="Huno on GitHub">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    <!--
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+    -->
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">浏览器缓存基本认识</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2018-02-01" class="post-meta__date date">2018-02-01</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>作为一名前端开发，工作基本上就是天天和浏览器打交道。那缓存这块也是前端领域离不开的话题，深入理解浏览器缓存将更有利于我们在前端中优化。</p>
+<p>浏览器缓存又分两种，分别是<code>强制缓存</code>和<code>协商缓存</code>，两种缓存方式区别在于有无发起HTTP请求。</p>
+<h2 id="什么是浏览器缓存"><a href="#什么是浏览器缓存" class="headerlink" title="什么是浏览器缓存"></a>什么是浏览器缓存</h2><p>浏览器向服务器获取资源（HTML页面、静态资源等）后，保存到浏览器的副本，当下一次请求同一个资源时，如果命中缓存规则，则直接使用浏览器的副本，否则重新向服务器获取新的资源。</p>
+<h2 id="强制缓存"><a href="#强制缓存" class="headerlink" title="强制缓存"></a>强制缓存</h2><p>当浏览器向服务器发起一个资源的HTTP请求后，会把当前资源的信息保存，再下一次继续加载该资源时，如果命中缓存规则就不会再向服务器发起HTTP请求，这种就称之为强制缓存。下面我们来看看如何能够命中强制缓存规则：</p>
+<img src="/2018/02/01/http-cache/http-cache-expires.png" title="expires and cache-control">
+<h3 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h3><p><code>Expires</code>是HTTP/1.0版本提出的，当浏览器向服务器获取某项资源时，Response Header会带有<code>Expires</code>字段返回，该字段内容存放的是过期的绝对时间，比如<code>Expires:Mon, 29 Jan 2018 06:02:42 GMT</code>，浏览器会保存当前资源和Response Header的内容，当下次再获取同一个资源时，浏览器会先把本地时间和<code>Expires</code>的时间做对比，如果当前时间还没到过期时间，则直接返回浏览器上次保存的资源，如果超过了该时间，则重新向服务器发起请求获取最新资源，并继续把当前资源和Response Header内容保存到本地。如果浏览器本地时间和服务器时间不一致的话，将直接影响缓存资源的判断。</p>
+<h3 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h3><p><code>Cache-Control</code>是HTTP/1.1版本提出的，当浏览器向服务器获取某项资源时，Response Header会带有<code>Cache-Control</code>字段返回，浏览器保存当前资源和Response Header的内容，当下次再获取同一个资源时，浏览器根据第一次的请求时间和<code>Cache-Control</code>设定的有效期，计算一个过期时间，如果请求时间还没到过期时间则命中缓存规则。<code>Cache-Control</code>字段存放内容相比<code>Expires</code>更加丰富，常见的有<code>Cache-Control: max-age=31536000</code>和<code>Cache-Control: no-cache</code>。<code>max-age</code>是指缓存存储的最大周期，在这个时间范围内代表缓存有效，<code>no-cache</code>是值不使用任何缓存资源副本。</p>
+<p><code>Cache-Control</code>字段可设置的内容较多，除上述两个外，还有<code>private</code>、<code>public</code>、<code>no-store</code>等等，具体可前往<a href="https://tools.ietf.org/html/rfc7234#section-5.2" target="_blank" rel="noopener">HTTP协议官方文档查阅</a>。</p>
+<p><code>Cache-Control</code>的优先级高于<code>Expires</code>，也就是说如果两者同时存在时，优先使用<code>Cache-Control</code>判断缓存规则。</p>
+<h2 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h2><p>当浏览器第一次向服务器获取一个资源时，浏览器会保存资源副本和Response Header到本地，下一次向服务器请求同个资源时，服务器会根据请求的Request Header中的某些字段做比较，如果符合缓存规则，服务器会向浏览器返回一个状态<code>304 Not Modified</code>表示资源相比较上一次请求时没有做修改，可以直接使用，这种就是协商缓存</p>
+<h3 id="If-None-Match-ETag"><a href="#If-None-Match-ETag" class="headerlink" title="If-None-Match/ETag"></a>If-None-Match/ETag</h3><p><code>If-None-Match</code>和<code>ETag</code>是成对出现的，是存放资源的唯一标识符，浏览器向服务器发起请求时，会在Request Header带上<code>If-None-Match</code>，服务器接收到请求后，会和请求的资源的<code>ETag</code>做比对，如果两着的值为一样，那么服务器认为这一次的资源与上一次请求的资源是一致的，返回<code>304 Not Modified</code>给浏览器，通知浏览器可以直接使用缓存资源副本。如果<code>If-None-Match</code>和<code>ETag</code>的值不一致，服务器会继续判断<code>If-Modified-Since</code>和<code>Last-Modified</code>。</p>
+<img src="/2018/02/01/http-cache/http-cache-etag.png" title="if-none-match and etag">
+<h3 id="If-Modified-Since-Last-Modified"><a href="#If-Modified-Since-Last-Modified" class="headerlink" title="If-Modified-Since/Last-Modified"></a>If-Modified-Since/Last-Modified</h3><p>和上面的一样，<code>If-Modified-Since</code>和<code>Last-Modified</code>也是成对出现的，是存放上一次修改的时间，浏览器向服务器发起请求时，会在Request Header带上<code>If-Modified-Since</code>，服务器接收到请求后，会和请求的资源的<code>Last-Modified</code>做比对，如果两着的值为一样，那么服务器认为这一次的资源与上一次请求的资源是一致的，返回<code>304 Not Modified</code>给浏览器，通知浏览器可以直接使用缓存资源副本。</p>
+<img src="/2018/02/01/http-cache/http-cache-last-modified.png" title="if-modified-since and last-modified">
+<p>为什么协商缓存可以利用两种类型做校验，是因为<code>If-Modified-Since/Last-Modified</code>标注的时间只能精确到秒级，对于在1秒内发生多次修改的资源，则无法正确判断资源是否一致，而<code>If-None-Match/ETag</code>提供的标识符则是资源每次改动则发生变化，能够更好的判断资源是否发生改动。在实际开发中，会发生资源不做变更，但是修改的时间却发生变化了，这种情况下如果只用<code>If-Modified-Since/Last-Modified</code>做比对，则无法命中协商缓存，而<code>If-None-Match/ETag</code>能够解决此类问题。</p>
+<p><code>If-None-Match/ETag</code>的优先级高于<code>If-Modified-Since/Last-Modified</code>，也就是说服务器接收到请求后，会先比较前者，前者不一致的情况下再比较后者。</p>
+
+  </section>
+
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2018. | 由<a href="https://hexo.io/">Hexo</a>强力驱动</span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>

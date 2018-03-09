@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      Vue.js系列—(1)初识 | 柠檬茶 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="Fang0408">
+    
+    
+
+    <meta name="description" content="Vue.js介绍如果你是一名前端开发，你还没听过Vue.js，那你一定要面壁思过了。。。Vue.js是当下非常火热的MVVM框架，什么？你连MVVM框架都不知道，那面壁思过时间再加10分钟。。。好了不开玩笑，现在我们开始正式介绍一下，官网说Vue.js是一种渐进式的JavaScript框架，我是这么理解渐进式的，大部分传统应用使用的还是jQuery库来完成我们的前端交互，我们也可以在项目中引入Vu">
+<meta name="keywords" content="Vue.js,abc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue.js系列—(1)初识 | 柠檬茶">
+<meta property="og:url" content="https://fang0408.github.io/2018/02/18/learn-vue/index.html">
+<meta property="og:site_name" content="柠檬茶">
+<meta property="og:description" content="Vue.js介绍如果你是一名前端开发，你还没听过Vue.js，那你一定要面壁思过了。。。Vue.js是当下非常火热的MVVM框架，什么？你连MVVM框架都不知道，那面壁思过时间再加10分钟。。。好了不开玩笑，现在我们开始正式介绍一下，官网说Vue.js是一种渐进式的JavaScript框架，我是这么理解渐进式的，大部分传统应用使用的还是jQuery库来完成我们的前端交互，我们也可以在项目中引入Vu">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://fang0408.github.io/2018/02/18/learn-vue/mvvm.png">
+<meta property="og:image" content="https://fang0408.github.io/2018/02/18/learn-vue/data.png">
+<meta property="og:image" content="https://fang0408.github.io/2018/02/18/learn-vue/base-vue-demo.png">
+<meta property="og:updated_time" content="2018-03-09T17:41:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue.js系列—(1)初识 | 柠檬茶">
+<meta name="twitter:description" content="Vue.js介绍如果你是一名前端开发，你还没听过Vue.js，那你一定要面壁思过了。。。Vue.js是当下非常火热的MVVM框架，什么？你连MVVM框架都不知道，那面壁思过时间再加10分钟。。。好了不开玩笑，现在我们开始正式介绍一下，官网说Vue.js是一种渐进式的JavaScript框架，我是这么理解渐进式的，大部分传统应用使用的还是jQuery库来完成我们的前端交互，我们也可以在项目中引入Vu">
+<meta name="twitter:image" content="https://fang0408.github.io/2018/02/18/learn-vue/mvvm.png">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">柠檬茶</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          程序猿的脚印
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/fang0408" title="Huno on GitHub">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    <!--
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+    -->
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">Vue.js系列—(1)初识</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2018-02-18" class="post-meta__date date">2018-02-18</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/Vue-js/">Vue.js</a>, <a class="tags-link" href="/tags/abc/">abc</a>
+            </font>
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <h2 id="Vue-js介绍"><a href="#Vue-js介绍" class="headerlink" title="Vue.js介绍"></a>Vue.js介绍</h2><p>如果你是一名前端开发，你还没听过<code>Vue.js</code>，那你一定要面壁思过了。。。<br><code>Vue.js</code>是当下非常火热的MVVM框架，什么？你连MVVM框架都不知道，那面壁思过时间再加10分钟。。。<br>好了不开玩笑，现在我们开始正式介绍一下，官网说<code>Vue.js</code>是一种渐进式的<code>JavaScript</code>框架，我是这么理解渐进式的，大部分传统应用使用的还是<code>jQuery</code>库来完成我们的前端交互，我们也可以在项目中引入<code>Vue.js</code>，满足部分功能来达到我们的目的。<code>Vue.js</code>还是一个以数据驱动的MVVM框架，意思是当你想去改变某个交互功能的时候，你应该想着通过改变一个数据去达到目的来替代操作DOM来完成。<code>Vue.js</code>提供了丰富又简洁的API供我们使用，我们只需在DOM里面和数据绑定起来，即可达到我们的目的。</p>
+<h3 id="MVVM"><a href="#MVVM" class="headerlink" title="MVVM"></a>MVVM</h3><p>前面说到了MVVM框架，MVVM的全称是（Model-View-ViewModel），下图是<code>Vue.js</code>在MVVM里面的交互实现。</p>
+<img src="/2018/02/18/learn-vue/mvvm.png" title="mvvm">
+<p>从上图看出View部分是由DOM组成的，Model就是<code>JavaScript</code>对象组成的数据，ViewModel就是一个由数据绑定和事件监听的<code>Vue.js</code>实例，这三部分共同组成完整的MVVM。</p>
+<h3 id="数据绑定"><a href="#数据绑定" class="headerlink" title="数据绑定"></a>数据绑定</h3><img src="/2018/02/18/learn-vue/data.png" title="data">
+<p>上图展示了在<code>Vue.js</code>中是如何进行双向数据绑定的。<code>Vue.js</code>内在初始化的时候会通过ES5的一个方法<code>Object.defineProperty</code>会读取Data内的数据，并且劫持对应的<code>getter</code>和<code>setter</code>，解析绑定的DOM，在<code>getter</code>方法内收集数据之间的依赖，然后进行监听。当数据发生改变的时候，会触发<code>setter</code>方法，然后对外发出一个通知告诉依赖项数据已经改变并且需要更新，数据更新后重新渲染DOM然后展示到页面上。然后再由DOM上的交互来触发数据的改变。</p>
+<h3 id="开始使用"><a href="#开始使用" class="headerlink" title="开始使用"></a>开始使用</h3><p>我们从一个最简单的例子开始，假设现在有一个输入框，我们需要在页面上实时展示输入框的内容。如果按照传统<code>jQuery</code>方式实现，我们需要做的是，获取输入框DOM节点，然后绑定<code>input</code>事件，在事件内获取展示内容的DOM节点，然后再更新<code>node.innerHTML</code>。</p>
+<p>我们来看看如何使用<code>Vue.js</code>来完成这个功能：<br>首先看看HTML片段，我们定义了一个id为app的<code>div</code>的父容器，子节点分别是一个带有<code>v-model</code>属性的<code>input</code>文本框，一个是<code>p</code>标签，注意内容有个地方是由双层花括号包起来的变量名，这是一种<code>mustache</code>语法。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">v-model</span>=<span class="string">"name"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>my name is &#123;&#123;name&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 引入Vue.js --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"path/to/vue.js"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>再来看看JS代码部分，我们<code>new</code>了一个<code>Vue</code>实例，入参是一个对象类型的配置项，其中包括<code>el</code>属性和<code>data</code>。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    name: <span class="string">''</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>然后我们就能看到如下所示的结果：<a href="https://jsfiddle.net/tdc96m57/1/" target="_blank" rel="noopener">demo</a></p>
+<img src="/2018/02/18/learn-vue/base-vue-demo.png" title="demo">
+<p>这仅仅是个简单的demo，从demo我们能看出，使用简洁的代码就能实现双向数据绑定，充分体现了<code>Vue.js</code>在数据绑定上带来的便利。接下来我们来看看创建实例的参数，其中<code>el</code>是指<code>Vue.js</code>实例要挂载的DOM节点，找到这个DOM并替换<code>Vue.js</code>编译后的内容；<code>data</code>是指实例中的数据，需要用到的数据一定要提前声明，否则<code>Vue.js</code>无法通过<code>Object.defineProperty</code>进行劫持（除非使用<code>vm.$set(obj, key, value)</code>进行添加数据）。<code>Vue.js</code>提供的参数选项除了上述两个之外，还有许多和实例相关的参数，考虑到篇幅长度，下一篇讲进行<code>Vue.js</code>实例化的参数选项解读。</p>
+<p>谢谢大家支持！</p>
+
+  </section>
+
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">Copyright &copy; 2018 Fang0408 | 粤ICP备18021784号</span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
